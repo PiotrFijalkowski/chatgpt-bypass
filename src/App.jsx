@@ -37,7 +37,7 @@ function GPT() {
           prompt: inputText,
           model: "text-davinci-003",
           max_tokens: 4000,
-          temperature: 1.0,
+          temperature: 0.3,
         },
         {
           headers: {
@@ -84,27 +84,31 @@ function GPT() {
         )}
       </div>
     ));
+    
   };
 
   return (
     <div className="chat-container">
-      <h1 className="chat-title">GPT Chat</h1>
-      <div className="chat-history">{renderChatHistory()}</div>
+      <h1 className="chat-title">GPT Chat Bypass</h1>
+      <div className="chat-history">
+        {renderChatHistory()}
+        <div ref={messagesEndRef} />
+        </div>
       <form onSubmit={handleInputSubmit}>
         <div className="chat-input-container">
           <input
             className="chat-input"
             type="text"
-            placeholder="Type your message here"
+            placeholder="Tu wpisz swoje zapytanie"
             value={input}
             onChange={handleInputChange}
           />
           <button className="chat-send-button" type="submit">
-            Send
+            Wyślij
           </button>
         </div>
       </form>
-      <div ref={messagesEndRef} />
+
     </div>
   );
 }
