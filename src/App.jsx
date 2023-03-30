@@ -37,7 +37,7 @@ function GPT() {
           prompt: inputText,
           model: "text-davinci-003",
           max_tokens: 4000,
-          temperature: 0.3,
+          temperature: 1,
         },
         {
           headers: {
