@@ -7,6 +7,7 @@ function GPT() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef(null);
+  const API_KEY = import.meta.env.VITE_MY_SECRET_KEY;
 
   const handleInputChange = (event) => {
     setInput(event.target.value);
@@ -41,16 +42,16 @@ function GPT() {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: "Bearer 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",
+            Authorization: `Bearer ${API_KEY}`,
           },
         }
       );
       const choices = response.data.choices;
       const text = choices.map((choice) => choice.text);
-      newChatEntry.output = text;
+      newChatEntry.output = text.join(" ");
       newChatEntry.loading = false;
-      setChatHistory((prevHistory) => [...prevHistory, newChatEntry]);
       setLoading(false);
+      scrollToBottom();
     } catch (error) {
       console.error(error);
     }
@@ -75,13 +76,11 @@ function GPT() {
             </div>
           </div>
         ) : (
-          chatEntry.output.map((output, outputIndex) => (
-            <div key={outputIndex} className="chat-entry">
-              <div className="chat-entry-bubble bot-bubble">
-                <div className="chat-entry-content">{output}</div>
-              </div>
+          <div className="chat-entry">
+            <div className="chat-entry-bubble bot-bubble">
+              <div className="chat-entry-content">{chatEntry.output}</div>
             </div>
-          ))
+          </div>
         )}
       </div>
     ));
@@ -107,7 +106,7 @@ function GPT() {
       </form>
       <div ref={messagesEndRef} />
     </div>
-    );
-  }
-  
-  export default GPT;
+  );
+}
+
+export default GPT;
