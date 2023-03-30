@@ -24,23 +24,17 @@ function GPT() {
     if (inputText.length === 0) {
       return;
     }
-  
+
     const newChatEntry = { input: inputText, output: "", loading: true };
     setChatHistory((prevHistory) => [...prevHistory, newChatEntry]);
     setLoading(true);
     setInput("");
-  
+
     try {
-      let prompt = inputText;
-      const lastIndex = chatHistory.length - 1;
-      if (lastIndex >= 0) {
-        const lastOutput = chatHistory[lastIndex].output;
-        prompt = `${lastOutput} ${inputText}`;
-      }
       const response = await axios.post(
         "https://api.openai.com/v1/completions",
         {
-          prompt: prompt,
+          prompt: inputText,
           model: "text-davinci-003",
           max_tokens: 4000,
           temperature: 1,
