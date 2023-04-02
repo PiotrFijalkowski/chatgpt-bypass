@@ -32,22 +32,21 @@ function GPT() {
 
     try {
       const response = await axios.post(
-        "https://api.openai.com/v1/completions",
+        "https://api.openai.com/v1/chat/completions",
         {
-          prompt: inputText,
-          model: "text-davinci-003",
-          max_tokens: 4000,
-          temperature: 1,
+          model: 'gpt-3.5-turbo',
+          messages: [{ role: 'user', content: inputText }],
+          temperature: 1
         },
         {
           headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${API_KEY}`,
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${API_KEY}`,
           },
         }
       );
       const choices = response.data.choices;
-      const text = choices.map((choice) => choice.text);
+      const text = choices.map((choice) => choice.message.content);
       newChatEntry.output = text.join(" ");
       newChatEntry.loading = false;
       setLoading(false);
