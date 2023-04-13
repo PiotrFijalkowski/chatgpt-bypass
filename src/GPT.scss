@@ -1,12 +1,14 @@
 .chat-container {
   margin: 0 auto;
   background-color: rgb(52,53,65);
-  padding: 20px;
-  position: absolute;
+  padding: 0px;
+  position: relative;
   bottom: 0;
   right: 0;
   top: 0;
   left: 0;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,10 +16,18 @@
   }
   
   .chat-title {
-  margin: 0;
-  text-align: center;
-  height: 100px;
-  width: 100%;
+    margin: 0;
+    text-align: center;
+    height: 100px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(43, 43, 45);
   h1 {
     font-size: 3.2em;
     line-height: 1.1;
@@ -30,10 +40,15 @@
   }
   
   .chat-history {
-  overflow-y: scroll;
-  flex-grow: 1;
-  padding-right: 15px;
-  width: 100%;
+    overflow-y: scroll;
+    flex-grow: 1;
+    padding-right: 15px;
+    width: 100%;
+    position: absolute;
+    top: 150px;
+    bottom: 150px;
+    left: 25px;
+    right: 25px;
   }
   
   .chat-entry {
@@ -97,13 +112,16 @@
   
   .chat-input-container {
   display: flex;
-  margin-top: 20px;
-  width: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 25px;
+
   @media (max-width: 599px) {
     flex-wrap: wrap;
     .chat-input {
-      margin-right: 0;
-      margin-bottom: 15px;
+      margin-right: 5px;
     }
     .chat-send-button {
       margin-left: auto;
@@ -136,11 +154,9 @@
   }
 
   form {
-    width: 100%;
     margin-top: auto;
     height: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-width: 100%;
   }
